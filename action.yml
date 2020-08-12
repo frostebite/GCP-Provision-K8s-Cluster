@@ -1,15 +1,27 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'Provision K8s Cluster'
+description: 'Use this action to provision a Kubernetes cluster on any of the major cloud providers (or configure your own), this is best used for workloads that are temporary as opposed to providing a permenant serivce.'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
-    required: true
-    default: 'World'
+  lockTimeout:  # id of input
+    description: 'Can be set to cleanup the cluster incase a lock isn't cleaned up. The default is set to 360, this means after 360 minutes the lock will expire and the cluster will be cleaned up'
+    required: false
+    default: '360'
+  shutdownPollingFrequency:  # id of input
+    description: 'Number of seconds to wait between checking if no locks remain, set to 0 to disable'
+    required: false
+    default: '30'
+  clusterCooldownPeriod:  # id of input
+    description: 'Number of minutes to wait after all locks have been removed to cleanup the cluster'
+    required: false
+    default: '0'
 outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  kubeConfig: # id of output
+    description: 'The kubeConfig to access the provisioned kubernetes cluster'
+  lock: # id of output
+    description: 'The key to access the lock for this provisioning'
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.who-to-greet }}
+    - ${{ inputs.lockTimeout }}
+    - ${{ inputs.shutdownPollingFrequency }}
+    - ${{ inputs.clusterCooldownPeriod }}
