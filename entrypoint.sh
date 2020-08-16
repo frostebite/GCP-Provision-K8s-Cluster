@@ -22,10 +22,10 @@ clusterCooldownPeriod=$9
 # may update this to avoid repeated install, drop me a comment if needed
 sh -c "curl https://raw.githubusercontent.com/kadwanev/retry/master/retry -o /usr/local/bin/retry && chmod +x /usr/local/bin/retry"
 
-if [ -n $dispose ];
+if [ -n "$dispose" ];
 then
   echo "disposing cluster"
-  source dispose.sh
+  source ./dispose.sh
   exit 0
 fi
 
