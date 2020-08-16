@@ -11,21 +11,21 @@ gcloud auth activate-service-account $1 --key-file=keyfile.json
 
 
 # GET INPUT
-export GKE_PROJECT=$3
-export GKE_CLUSTER=$4
-export GKE_ZONE=$5
-export dispose=$6
-export lockTimeout=$7
-export shutdownPollingFrequency=$8
-export clusterCooldownPeriod=$9
+GKE_PROJECT=$3
+GKE_CLUSTER=$4
+GKE_ZONE=$5
+dispose=$6
+lockTimeout=$7
+shutdownPollingFrequency=$8
+clusterCooldownPeriod=$9
 
 # may update this to avoid repeated install, drop me a comment if needed
 sh -c "curl https://raw.githubusercontent.com/kadwanev/retry/master/retry -o /usr/local/bin/retry && chmod +x /usr/local/bin/retry"
 
-if [ -z $dispose ];
+if [ -n $dispose ];
 then
   echo "disposing cluster"
-  ./dispose
+  source dispose.sh
   exit 0
 fi
 
