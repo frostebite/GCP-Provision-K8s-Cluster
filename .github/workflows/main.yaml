@@ -20,18 +20,10 @@ jobs:
       - uses: actions/checkout@v2
         with:
           lfs: true
-      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-        with:
-          version: '288.0.0'
-          service_account_email: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}
-          service_account_key: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
-      - uses: frostebite/File-To-Base64@master
-        id: read-base64
-        with:
-          filePath: ~/.config/gcloud/configurations/config_default
       - uses: ./
         with:
-            authentication: ${{ steps.read-base64.outputs.base64 }}
+            GOOGLE_SERVICE_ACCOUNT_EMAIL: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}
+            GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
             project: ${{ env.GKE_PROJECT }}
             cluster: ${{ env.GKE_CLUSTER }}
             zone: ${{ env.GKE_ZONE }}

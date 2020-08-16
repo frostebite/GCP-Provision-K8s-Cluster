@@ -13,10 +13,14 @@ inputs:
     description: 'Number of minutes to wait after all locks have been removed to cleanup the cluster'
     required: false
     default: '0'
-  authentication:
-    description: 'Base64 GCP credentials'
-    required: true
-    default: ''
+    GOOGLE_SERVICE_ACCOUNT_EMAIL:
+      description: 'Service account email'
+      required: true
+      default: ''
+    GOOGLE_SERVICE_ACCOUNT_KEY:
+      description: 'Base64 service account key'
+      required: true
+      default: ''
   project:
     description: ''
     required: true
@@ -38,7 +42,8 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.authentication }}
+    - ${{ inputs.GOOGLE_SERVICE_ACCOUNT_EMAIL }}
+    - ${{ inputs.GOOGLE_SERVICE_ACCOUNT_KEY }}
     - ${{ inputs.project }}
     - ${{ inputs.cluster }}
     - ${{ inputs.zone }}

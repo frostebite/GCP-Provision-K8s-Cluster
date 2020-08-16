@@ -1,17 +1,16 @@
 #!/bin/sh -l
 
 # DECODE GCP CONFIG
-mkdir -p ~/.config/gcloud/configurations
-echo $1 | base64 -d > ~/.config/gcloud/configurations/config_default
-echo "Applied GCP config"
+echo $2 | base64 -d > keyfile.json
+gcloud auth activate-service-account $1 --key-file=keyfile.json
 
 # GET INPUT
-GKE_PROJECT=$2
-GKE_CLUSTER=$3
-GKE_ZONE=$4
-lockTimeout=$5
-shutdownPollingFrequency=$6
-clusterCooldownPeriod=$7
+GKE_PROJECT=$3
+GKE_CLUSTER=$4
+GKE_ZONE=$5
+lockTimeout=$6
+shutdownPollingFrequency=$7
+clusterCooldownPeriod=$8
 
 # may update this to avoid repeated install, drop me a comment if needed
 sh -c "curl https://raw.githubusercontent.com/kadwanev/retry/master/retry -o /usr/local/bin/retry && chmod +x /usr/local/bin/retry"
