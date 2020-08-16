@@ -1,5 +1,10 @@
 #!/bin/sh -l
 
+# install jq and gcloud
+apt-get update
+apt-get install jq -y
+apt-get install google-cloud-sdk -y
+
 # DECODE GCP CONFIG
 echo $2 | base64 -d > keyfile.json
 gcloud auth activate-service-account $1 --key-file=keyfile.json
@@ -15,11 +20,6 @@ clusterCooldownPeriod=$8
 
 # may update this to avoid repeated install, drop me a comment if needed
 sh -c "curl https://raw.githubusercontent.com/kadwanev/retry/master/retry -o /usr/local/bin/retry && chmod +x /usr/local/bin/retry"
-
-# install jq
-apt-get update
-apt-get install jq -y
-apt-get install google-cloud-sdk -y
 
 attempts=0
 while [ $attempts -le 1 ]
