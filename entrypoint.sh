@@ -13,11 +13,6 @@ lockTimeout=$5
 shutdownPollingFrequency=$6
 clusterCooldownPeriod=$7
 
-
-echo "Hello $1"
-time=$(date)
-echo ::set-output name=time::$time
-
 # may update this to avoid repeated install, drop me a comment if needed
 sudo sh -c "curl https://raw.githubusercontent.com/kadwanev/retry/master/retry -o /usr/local/bin/retry && chmod +x /usr/local/bin/retry"
 
