@@ -14,7 +14,7 @@ shutdownPollingFrequency=$6
 clusterCooldownPeriod=$7
 
 # may update this to avoid repeated install, drop me a comment if needed
-sudo sh -c "curl https://raw.githubusercontent.com/kadwanev/retry/master/retry -o /usr/local/bin/retry && chmod +x /usr/local/bin/retry"
+sh -c "curl https://raw.githubusercontent.com/kadwanev/retry/master/retry -o /usr/local/bin/retry && chmod +x /usr/local/bin/retry"
 
 attempts=0
 while [ $attempts -le 1 ]
