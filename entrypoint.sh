@@ -4,6 +4,7 @@
 echo $2 | base64 -d > keyfile.json
 gcloud auth activate-service-account $1 --key-file=keyfile.json
 
+
 # GET INPUT
 GKE_PROJECT=$3
 GKE_CLUSTER=$4
@@ -14,6 +15,10 @@ clusterCooldownPeriod=$8
 
 # may update this to avoid repeated install, drop me a comment if needed
 sh -c "curl https://raw.githubusercontent.com/kadwanev/retry/master/retry -o /usr/local/bin/retry && chmod +x /usr/local/bin/retry"
+
+# install jq
+apt-get update
+apt-get install jq
 
 attempts=0
 while [ $attempts -le 1 ]
