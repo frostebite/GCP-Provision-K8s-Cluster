@@ -24,6 +24,7 @@ sh -c "curl https://raw.githubusercontent.com/kadwanev/retry/master/retry -o /us
 
 if [ -z $dispose ];
 then
+  echo "disposing cluster"
   ./dispose
   exit 0
 fi

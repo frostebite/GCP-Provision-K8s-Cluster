@@ -51,6 +51,7 @@ runs:
     - ${{ inputs.project }}
     - ${{ inputs.cluster }}
     - ${{ inputs.zone }}
+    - ${{ inputs.dispose }}
     - ${{ inputs.lockTimeout }}
     - ${{ inputs.shutdownPollingFrequency }}
     - ${{ inputs.clusterCooldownPeriod }}
