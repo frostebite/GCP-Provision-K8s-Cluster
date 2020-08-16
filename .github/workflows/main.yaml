@@ -21,6 +21,7 @@ jobs:
         with:
           lfs: true
       - uses: ./
+        id: provision
         with:
             GOOGLE_SERVICE_ACCOUNT_EMAIL: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}
             GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
@@ -34,5 +35,6 @@ jobs:
           project: ${{ env.GKE_PROJECT }}
           cluster: ${{ env.GKE_CLUSTER }}
           zone: ${{ env.GKE_ZONE }}
+          lock: ${{ steps.provision.outputs.lock }}
           dispose: true
 

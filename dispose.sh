@@ -1,7 +1,7 @@
-kubectl delete ns ns-unity-builder-$NSID
+kubectl delete ns $lock
 
 # do any unity-builder namespaces remain?
-namespaceCount=$(kubectl get ns --output json | jq ".items | .[] | select(.metadata.labels.app == \"unity-builder\") | select(.status.phase != \"TERMINATING\")" | jq -s "length")
+namespaceCount=$(kubectl get ns --output json | jq ".items | .[] | select(.metadata.labels.app == \"$app\") | select(.status.phase != \"TERMINATING\")" | jq -s "length")
 echo $namespaceCount
 if [ "$namespaceCount" != "0" ]
 then

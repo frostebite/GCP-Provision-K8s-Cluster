@@ -37,6 +37,10 @@ inputs:
     description: ''
     required: true
     default: ''
+  lock:
+    description: ''
+    required: false
+    default: ''
 outputs:
   kubeConfig: # id of output
     description: 'The kubeConfig to access the provisioned kubernetes cluster'
@@ -55,3 +59,4 @@ runs:
     - ${{ inputs.lockTimeout }}
     - ${{ inputs.shutdownPollingFrequency }}
     - ${{ inputs.clusterCooldownPeriod }}
+    - ${{ inputs.lock }}

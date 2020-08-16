@@ -18,6 +18,8 @@ dispose=$6
 lockTimeout=$7
 shutdownPollingFrequency=$8
 clusterCooldownPeriod=$9
+lock=$10
+app="provisioning-lock"
 
 # may update this to avoid repeated install, drop me a comment if needed
 sh -c "curl https://raw.githubusercontent.com/kadwanev/retry/master/retry -o /usr/local/bin/retry && chmod +x /usr/local/bin/retry"
@@ -25,7 +27,7 @@ sh -c "curl https://raw.githubusercontent.com/kadwanev/retry/master/retry -o /us
 if [ -n "$dispose" ];
 then
   echo "disposing cluster"
-  source /dispose
+  source /dispose.sh
   exit 0
 fi
 
@@ -67,16 +69,23 @@ retry -s 15 -t 20 -v '
 echo "Cluster is available"
 gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
 kubectl version
-NSID=$(cat /proc/sys/kernel/random/uuid)
-echo "::set-env name=NSID::"$NSID
+
+# base64 encode kubectl
+LOCKID=$(cat /proc/sys/kernel/random/uuid)
+LOCK="ns-unity-builder-$LOCKID"
+K8CONF=$(cat ~/.kube/config | base64 -w 0)
+
+echo "::set-output kubeConfig=$K8CONF::"
+echo "::set-output lock=$LOCK::"
+
 {
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: ns-unity-builder-$NSID
+  name: $LOCK
   labels:
-    app: unity-builder
+    app: $app
 EOF
 } && exit 0
 
