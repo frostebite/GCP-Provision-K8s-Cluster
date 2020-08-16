@@ -26,6 +26,7 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
+    - ${{ inputs.authentication }}
     - ${{ inputs.lockTimeout }}
     - ${{ inputs.shutdownPollingFrequency }}
     - ${{ inputs.clusterCooldownPeriod }}
