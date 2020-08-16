@@ -21,6 +21,10 @@ inputs:
       description: 'Base64 service account key'
       required: true
       default: ''
+  dispose:
+    description: ''
+    required: false
+    default: ''
   project:
     description: ''
     required: true

@@ -3,6 +3,9 @@ Use this action to use Kubernetes to provision a K8s cluster.
 # Provisioning
 If a cluster with the same name already exists it will be used, if no cluster with the same name is found one will be created.
 
+## Cloud provider support
+This action supports only GCP.
+
 # Input
 A lockTimeout can be set to cleanup the cluster incase a lock isn't cleaned up. The default is set to 360, this means after 360 minutes the lock will expire and the cluster will be cleaned up.
 
@@ -17,12 +20,5 @@ The action will also return the a lock key, this lock key is then used when disp
 # Cleaning up the cluster
 At the end of running work on the cluster, the [Dispose-K8s-Cluster]() action should be used to destroy the cluster. The dispose action will release the lock that prevents shutdown and then check if any other locks remain, if any do the cluster will not be deleted, if no locks remain the cluster is not running any work and will be shutdown.
 
-# Cloud provider support
-Works for: GCP, AWS, Azure and Digital Ocean
-Custom provider support can be added
-
-# Configuring the cluster
-
-# Locks
+## Locks
 Locks are used in this action to prevent the cluster being cleaned up while other workloads may still be running. Namespaces are currently used to lock a cluster.
-
