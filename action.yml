@@ -4,7 +4,7 @@ inputs:
   lockTimeout:  # id of input
     required: false
     default: '360'
-    description: 'Can be set to cleanup the cluster incase a lock isn't cleaned up. The default is set to 360, this means after 360 minutes the lock will expire and the cluster will be cleaned up'
+    description: 'Can be set to cleanup the cluster incase a lock is not cleaned up. The default is set to 360, this means after 360 minutes the lock will expire and the cluster will be cleaned up'
   shutdownPollingFrequency:  # id of input
     description: 'Number of seconds to wait between checking if no locks remain, set to 0 to disable'
     required: false
