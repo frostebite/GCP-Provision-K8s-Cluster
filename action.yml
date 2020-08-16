@@ -1,10 +1,6 @@
 name: 'Provision K8s Cluster'
 description: 'Use this action to provision a Kubernetes cluster on any of the major cloud providers (or configure your own), this is best used for workloads that are temporary as opposed to providing a permenant serivce.'
 inputs:
-  authentication:
-    default: ''
-    required: true
-    description: 'a json array of objects containing a filepath and base64 encoded content, each of these will be decoded and created before running any commands, use this to supply command line configuration and authentication.'
   lockTimeout:  # id of input
     description: 'Can be set to cleanup the cluster incase a lock isn't cleaned up. The default is set to 360, this means after 360 minutes the lock will expire and the cluster will be cleaned up'
     required: false
@@ -17,14 +13,6 @@ inputs:
     description: 'Number of minutes to wait after all locks have been removed to cleanup the cluster'
     required: false
     default: '0'
-  getCluster:
-    default: ''
-    required: true
-    description: 'command line command to get the json object for a kuber'
-  createCluster:
-    default: ''
-  getK8sCredentials:
-    default: ''
 outputs:
   kubeConfig: # id of output
     description: 'The kubeConfig to access the provisioned kubernetes cluster'
