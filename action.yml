@@ -1,6 +1,10 @@
 name: 'Provision K8s Cluster'
 description: 'Use this action to provision a Kubernetes cluster on any of the major cloud providers (or configure your own), this is best used for workloads that are temporary as opposed to providing a permenant serivce.'
 inputs:
+  authentication:
+    description: 'Base64 GCP credentials'
+    required: true
+    default: ''
   lockTimeout:  # id of input
     description: 'Can be set to cleanup the cluster incase a lock isn't cleaned up. The default is set to 360, this means after 360 minutes the lock will expire and the cluster will be cleaned up'
     required: false
