@@ -27,3 +27,11 @@ jobs:
             project: ${{ env.GKE_PROJECT }}
             cluster: ${{ env.GKE_CLUSTER }}
             zone: ${{ env.GKE_ZONE }}
+      - uses: frostebite/Dispose-K8s-Cluster@master
+        with:
+          GOOGLE_SERVICE_ACCOUNT_EMAIL: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}
+          GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
+          project: ${{ env.GKE_PROJECT }}
+          cluster: ${{ env.GKE_CLUSTER }}
+          zone: ${{ env.GKE_ZONE }}
+
