@@ -32,3 +32,6 @@ jobs:
       - uses: ./
         with:
             authentication: ${{ steps.read-base64.outputs.base64 }}
+            project: ${{ env.GKE_PROJECT }}
+            cluster: ${{ env.GKE_CLUSTER }}
+            zone: ${{ env.GKE_ZONE }}

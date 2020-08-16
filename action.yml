@@ -17,6 +17,18 @@ inputs:
     description: 'Base64 GCP credentials'
     required: true
     default: ''
+  project:
+    description: ''
+    required: true
+    default: ''
+  cluster:
+    description: ''
+    required: true
+    default: ''
+  zone:
+    description: ''
+    required: true
+    default: ''
 outputs:
   kubeConfig: # id of output
     description: 'The kubeConfig to access the provisioned kubernetes cluster'
@@ -27,6 +39,9 @@ runs:
   image: 'Dockerfile'
   args:
     - ${{ inputs.authentication }}
+    - ${{ inputs.project }}
+    - ${{ inputs.cluster }}
+    - ${{ inputs.zone }}
     - ${{ inputs.lockTimeout }}
     - ${{ inputs.shutdownPollingFrequency }}
     - ${{ inputs.clusterCooldownPeriod }}
