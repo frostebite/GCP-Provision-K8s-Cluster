@@ -19,6 +19,7 @@ sh -c "curl https://raw.githubusercontent.com/kadwanev/retry/master/retry -o /us
 # install jq
 apt-get update
 apt-get install jq -y
+apt-get install google-cloud-sdk -y
 
 attempts=0
 while [ $attempts -le 1 ]
