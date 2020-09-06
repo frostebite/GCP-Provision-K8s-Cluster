@@ -30,7 +30,8 @@ jobs:
             zone: ${{ env.GKE_ZONE }}
       - uses: azure/setup-kubectl@v1
       - run: |
-          echo ${{steps.provision.outputs.kubeConfig}} | base64 -d > ~/.kube/config
+          V1=${{steps.provision.outputs.kubeConfig}}
+          echo $V1 | base64 -d > ~/.kube/config
           kubectl get ns
       - uses: ./
         with:
