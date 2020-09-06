@@ -76,8 +76,8 @@ LOCKID=$(cat /proc/sys/kernel/random/uuid)
 LOCK="ns-unity-builder-$LOCKID"
 K8CONF=$(cat ~/.kube/config | base64 -w 0)
 
-echo "::set-output name=kubeConfig::$K8CONF"
-echo "::set-output name=lock::$LOCK"
+echo "::set-output name=kubeConfig::"$K8CONF
+echo "::set-output name=lock::"$LOCK
 
 {
 cat <<EOF | kubectl apply -f -
